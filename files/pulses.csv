@@ -1,0 +1,6 @@
+"Name","Type","Maximum Rabi Rate","Polar Angle"
+"My Awesome Pulse","primitive",10,0.5
+"Another Awesome Pulse","corpse",250,0.8
+"A Pretty Good Pulse","gaussian",1,0.1
+"An Average Pulse","cinbb",20,0.2
+"A Really Terrible Pulse","cinsk",10,0.1

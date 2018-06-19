@@ -125,10 +125,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = ''
 
+MEDIA_ROOT = './upload/'
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 5,
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     )

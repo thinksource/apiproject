@@ -73,3 +73,7 @@ Two endpoints:
 1. download files as response csv format
 
 
+### Notice
+
+1. In order to avoid confliction of build_in function in python 3, I use ctype replace type in database.
+

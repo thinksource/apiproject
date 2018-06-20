@@ -3,7 +3,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import generics
-from rest_framework import FileUploadParser
+from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import MultiPartParser
+from rest_framework.views import APIView
+
 from pulse.models import Pulse
 from pulse.serializers import PulseSerializer
 from rest_framework import permissions
@@ -11,6 +14,8 @@ from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 import json
 from myproject import settings
+from myproject.utils import csvParser
+from django.http import HttpResponse
 # @api_view(['GET'])
 # def api_root(request, format=None):
 #     return Response({
@@ -119,10 +124,28 @@ class PulseCreate(generics.CreateAPIView):
             return Response(s.data, status=status.HTTP_201_CREATED)
         return Response(s.errors, status=status.HTTP_400_BAD_REQUEST)
  
-class FileUploadView(generics.ListCreateAPIView):
-    http_method_names = ['post']
+class FileUploadView(APIView):
+    http_method_names = ['post','get']
     serializer_class= PulseSerializer
     permission_class = (permissions.AllowAny)
-    parser_classes = (FileUploadParser,)
+    parser_classes = (MultiPartParser,)
 
-    def post(self, request, *args, **kwargs):
+    def get_queryset(self):
+        return super(FileUploaderView, self).get_queryset()
+
+    def post(self,request, filename="file", format=None):
+        file_keys=list(request.FILES.keys())
+        file_obj = request.FILES[file_keys[0]]
+        update_items=csvParser.readercsv(file_obj)
+        for i in update_items:
+            s=PulseSerializer(data=i)
+            if s.is_valid():
+                s.save()
+        return Response(update_items, status=status.HTTP_201_CREATED)
+
+    def get(self, request,*args, **kwargs):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+
+        csvParser.writecsv(Pulse.objects.all(), response)
+        return response

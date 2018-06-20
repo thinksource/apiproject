@@ -134,8 +134,10 @@ class FileUploadView(APIView):
         return Response(update_items, status=status.HTTP_201_CREATED)
 
     def get(self, request, *args, **kwargs):
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+        outputfile=csvParser.writecsv(Pulse.objects.all())
+        response = HttpResponse(outputfile.getvalue(), content_type='text/csv')
 
-        csvParser.writecsv(Pulse.objects.all(), response)
+        response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+        # response['X-Sendfile'] = outputfile.getvalue()
+        
         return response

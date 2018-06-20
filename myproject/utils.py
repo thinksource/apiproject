@@ -27,10 +27,11 @@ class csvParser:
         return re
 
     @staticmethod
-    def writecsv(dict_items, csvfile):
-        writer = csv.DictWriter(csvfile, fieldnames=csvParser.dictkeys)
+    def writecsv(dict_items):
+        output = io.StringIO()
+        writer = csv.DictWriter(output, fieldnames=csvParser.dictkeys)
 
         for item in dict_items:
             writer.writerow(item)
 
-        return csvfile
+        return output

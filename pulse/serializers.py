@@ -14,7 +14,6 @@ class PulseSerializer(serializers.HyperlinkedModelSerializer):
     def update(self, instance, validated_data):
         # valiated_data['ctype']=valiated_data['type']
         # del valiated_data['type']
-        print(validated_data)
         for field in validated_data:
             instance.__setattr__(field, validated_data.get(field))
 

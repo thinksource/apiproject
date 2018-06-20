@@ -44,7 +44,7 @@ class PulseDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def post_queryset(self):
         s = PulseSerializer(data=self.request.data)
-        print(self.request.data)
+        # print(self.request.data)
         if s.is_valid():
             s.save()
             return Response(s.data, status=status.HTTP_201_CREATED)
@@ -105,7 +105,7 @@ class PulseCreate(generics.CreateAPIView):
 
     def post_queryset(self):
         s = PulaseSerializer(data=self.request.data)
-        print(self.request.data)
+        # print(self.request.data)
         if s.is_valid():
             s.save()
             return Response(s.data, status=status.HTTP_201_CREATED)

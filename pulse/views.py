@@ -23,7 +23,7 @@ class PulseList(generics.ListCreateAPIView):
     permission_class = (permissions.AllowAny)
 
     def get_queryset(self, page=1):
-        paginator = Paginator(Pulse.objects.all(), settings.REST_FRAMEWORK.PAGE_SIZE)
+        paginator = Paginator(Pulse.objects.all(), settings.REST_FRAMEWORK['PAGE_SIZE'])
         return paginator.get_page(page)
 
     def list(self, request):

@@ -3,7 +3,6 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import generics
-from rest_framework.parsers import FileUploadParser
 from rest_framework.parsers import MultiPartParser
 from rest_framework.views import APIView
 
@@ -16,15 +15,6 @@ import json
 from myproject import settings
 from myproject.utils import csvParser
 from django.http import HttpResponse
-# @api_view(['GET'])
-# def api_root(request, format=None):
-#     return Response({
-#        'users': reverse('users:user-list', request=request, format=format),
-#        'todos': reverse('todos:todo-list', request=request, format=format),
-# })
-
-# def index(request):
-#     return HttpResponse("Hello, world. You're at the polls index.")
 
 class PulseList(generics.ListCreateAPIView):
     http_method_names = ['get']

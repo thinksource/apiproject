@@ -13,7 +13,6 @@ class csvParser:
         dict_list = []
         re=[]
         for line in reader:
-            print(line)
             dict_list.append(line)
         
         for item in dict_list:

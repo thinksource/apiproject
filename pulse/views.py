@@ -135,12 +135,14 @@ class FileUploadView(APIView):
 
     def post(self,request, filename="file", format=None):
         file_keys=list(request.FILES.keys())
-        file_obj = request.FILES[file_keys[0]]
-        update_items=csvParser.readercsv(file_obj)
-        for i in update_items:
-            s=PulseSerializer(data=i)
-            if s.is_valid():
-                s.save()
+        update_items=[]
+        for key in file_keys:
+            file_obj = request.FILES[key]
+            update_items.extend(csvParser.readercsv(file_obj))
+            for i in update_items:
+                s=PulseSerializer(data=i)
+                if s.is_valid():
+                    s.save()
         return Response(update_items, status=status.HTTP_201_CREATED)
 
     def get(self, request,*args, **kwargs):

@@ -51,15 +51,15 @@ Two endpoints:
 1. get method at 'api/pulses'
 
 - Get a specific pulse
-1. get method at 'api/pulse/<id>'
+1. get method at 'api/pulse/:id'
 
 - Update a specific pulse
 
-1. put method at 'api/pulse/<id>'
-2. post method at 'api/pulse/<id>'----for post method if the id is exist it will update, if not it will create a new one.
+1. put method at 'api/pulse/:id'
+2. post method at 'api/pulse/:id'----for post method if the id is exist it will update, if not it will create a new one.
 
 - Delete a specific pulse
-1.delete method at 'api/pulse/<id>'
+1.delete method at 'api/pulse/:id'
 
 ### Upload pulses
 
@@ -71,6 +71,13 @@ Two endpoints:
 ### Download pulses
 
 1. download files as response csv format
+
+
+### TestCases in tests fold
+
+Test unit tests:
+
+`python manage.py test tests`
 
 
 ### Notice

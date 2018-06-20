@@ -20,7 +20,7 @@ class Pulse(models.Model):
     def __getitem__(self, key):
         return {
             'name': self.name,
-            'type': self.ctype,
+            'ctype': self.ctype,
             'maximum_rabi_rate': self.maximum_rabi_rate,
             'polar_angle': self.polar_angle
         }[key]

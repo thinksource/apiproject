@@ -70,7 +70,7 @@ Two endpoints:
 
 ### Download pulses
 
-1. download files as response csv format
+1. download files as response csv format, this is get method 'api/csv'
 
 
 ### TestCases in tests fold
